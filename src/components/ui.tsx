@@ -3,9 +3,9 @@ import { BASIS_LABEL, type BasisType } from '../types';
 import { useApp } from '../lib/store';
 
 export function Header({
-  title, subtitle, right, onBack, showHome = true, showDemo = true,
+  title, subtitle, right, onBack, showHome = true,
 }: { title: string; subtitle?: string; right?: React.ReactNode; onBack?: () => void; showHome?: boolean; showDemo?: boolean }) {
-  const { back, goHome, toast } = useApp();
+  const { back, goHome } = useApp();
   return (
     <div className="header">
       <button className="header-back" aria-label="返回" onClick={onBack ?? back}>‹</button>
@@ -15,7 +15,6 @@ export function Header({
       </div>
       <div className="header-actions">
         {right}
-        {showDemo && <button className="tag tag-demo" style={{ border: 'none' }} onClick={() => toast('本页所有菜谱、复刻、商品与购买入口均为演示数据，不代表真实平台内容。')}>演示</button>}
         {showHome && <button className="header-home" onClick={goHome}>首页</button>}
       </div>
     </div>
@@ -151,3 +150,4 @@ export function Empty({ children }: { children: React.ReactNode }) {
 export function DemoNote({ children }: { children: React.ReactNode }) {
   return <Notice tone="demo"><b>演示说明：</b>{children}</Notice>;
 }
+

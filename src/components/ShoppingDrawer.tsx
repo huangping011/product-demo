@@ -118,11 +118,11 @@ export function ShoppingDrawer({ planId, onClose }: { planId: string; onClose: (
       {optional.length > 0 && (
         <>
           <div className="section-head">
-            <div className="section-title">② 想还原原味（可选）</div>
+            <div className="section-title">可选</div>
             <button className="text-btn" onClick={() => setShowOptional((v) => !v)}>{showOptional ? '收起' : `展开 ${optional.length} 项`}</button>
           </div>
           {showOptional && optional.map((m) => <MaterialRow key={m.key} m={m} planId={planId} />)}
-          {!showOptional && <div className="small muted mb10">已用替代 / 省略解决；想还原原方可以另购，不买也不影响当前方案。</div>}
+          {!showOptional && <div className="small muted mb10">已用替代 / 省略，希望接近原味可购</div>}
         </>
       )}
 
@@ -169,6 +169,7 @@ export function ProductDrawer({
     </Drawer>
   );
 }
+
 
 
 

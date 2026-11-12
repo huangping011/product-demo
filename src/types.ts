@@ -5,7 +5,7 @@ export type Appliance = (typeof APPLIANCES)[number];
 
 export const COMMON_ALLERGENS = ['花生', '蛋类', '虾蟹/甲壳类', '大豆', '小麦/麸质', '芝麻', '乳制品'] as const;
 
-export type MaterialGroup = 'main' | 'seasoning' | 'staple';
+export type MaterialGroup = 'main' | 'seasoning' | 'staple' | 'cookware';
 export type BasisType = 'author' | 'community' | 'ai';
 export type StockState = 'have' | 'missing' | 'unsure';
 export type Strategy = 'useExisting' | 'canBuy' | 'followOriginal';
@@ -300,6 +300,7 @@ export const GROUP_LABEL: Record<MaterialGroup, string> = {
   main: '食材',
   seasoning: '调味品',
   staple: '主食 / 配菜',
+  cookware: '厨具',
 };
 
 export const RESULT_LABEL: Record<ReplicationResult, string> = {
@@ -307,6 +308,7 @@ export const RESULT_LABEL: Record<ReplicationResult, string> = {
   mostly: '基本成功',
   failed: '未达到预期',
 };
+
 
 
 

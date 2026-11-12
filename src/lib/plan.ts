@@ -534,6 +534,19 @@ export function switchPlanMode(plan: Plan, mode: PlanMode): Plan {
         reason: substituted ? '原版必需材料；你已选替代方案，此项转为「想还原原版」的可选采购' : m.reason,
       } satisfies MaterialItem;
     });
+    if (!conditions.appliances.includes(recipe.primaryAppliance)) {
+      materials.push({
+        key: 'original-cookware',
+        name: recipe.primaryAppliance,
+        amount: '1 口',
+        group: 'cookware',
+        essential: true,
+        state: 'need',
+        substitutes: [],
+        confirmedReady: false,
+        reason: '接近原味方案需要使用原方厨具',
+      });
+    }
     return {
       ...plan,
       mode,
@@ -555,7 +568,7 @@ export function switchPlanMode(plan: Plan, mode: PlanMode): Plan {
 
   // 用现有条件做：恢复用户确认的替换/省略
   const res = preparePlan(recipe, conditions, { id: plan.id, engine: plan.engine, fallbackNotice: plan.fallbackNotice });
-  return res.ok ? { ...res.plan, mode: 'adapted' } : plan;
+  return res.ok ? { ...res.plan, saved: plan.saved, mode: 'adapted' } : plan;
 }
 
 /** 用户在方案页主动确认使用替代品；不安全的替代品会被拒绝 */
@@ -644,6 +657,7 @@ export function validateModelPlan(value: unknown): value is Partial<Plan> {
     Array.isArray(v.changes)
   );
 }
+
 
 
 

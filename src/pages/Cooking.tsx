@@ -52,9 +52,10 @@ export function CookingPage({ planId }: { planId: string }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const finish = (destination: 'plan' | 'homework') => {
+  const finish = (destination: 'home' | 'homework') => {
     persist({ completed: true, timerEndsAt: undefined, timerStepId: undefined });
-    app.navigate({ name: destination, planId });
+    if (destination === 'home') app.goHome();
+    else app.navigate({ name: 'homework', planId });
   };
 
   return (
@@ -64,7 +65,7 @@ export function CookingPage({ planId }: { planId: string }) {
         <>
           {isLast ? (
             <>
-              <Button variant="secondary" onClick={() => finish('plan')}>完成</Button>
+              <Button variant="secondary" onClick={() => finish('home')}>完成</Button>
               <Button onClick={() => finish('homework')}>交作业</Button>
             </>
           ) : (
@@ -99,7 +100,7 @@ export function CookingPage({ planId }: { planId: string }) {
 
           <div className="timer-box">
             <div>
-              <div className="tiny muted">本步计时（由你主动启动）</div>
+              <div className="tiny muted">本步计时</div>
               <div className="timer-value">{timerActive ? (timerDone ? '计时结束' : mmss(remaining)) : `${String(step.minutes).padStart(2, '0')}:00`}</div>
             </div>
             {timerActive ? (
@@ -115,5 +116,6 @@ export function CookingPage({ planId }: { planId: string }) {
     </>
   );
 }
+
 
 
